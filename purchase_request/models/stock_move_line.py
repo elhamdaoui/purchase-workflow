@@ -23,7 +23,7 @@ class StockMoveLine(models.Model):
             message_data["picking_name"],
         )
         message += "<ul>"
-        message += _("<li><b>%s</b>: Transferred quantity %s %s</li>") % (
+        message += _("<li><b>%s</b>: Transferred quantity %s - %s</li>") % (
             message_data["product_name"],
             message_data["product_qty"],
             message_data["product_uom"],
@@ -47,7 +47,7 @@ class StockMoveLine(models.Model):
             message_data["location_name"],
         )
         message += "<ul>"
-        message += _("<li><b>%s</b>: Transferred quantity %s %s</li>") % (
+        message += _("<li><b>%s</b>: Transferred quantity %s - %s</li>") % (
             message_data["product_name"],
             message_data["product_qty"],
             message_data["product_uom"],

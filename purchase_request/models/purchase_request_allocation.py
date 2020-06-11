@@ -92,7 +92,7 @@ class PurchaseRequestAllocation(models.Model):
             "allocated to this purchase request"
         )
         message += "<ul>"
-        message += _("<li><b>%s</b>: Received quantity %s %s</li>") % (
+        message += _("<li><b>%s</b>: Received quantity %s - %s</li>") % (
             message_data["product_name"],
             message_data["product_qty"],
             message_data["product_uom"],

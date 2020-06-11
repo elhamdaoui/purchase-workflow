@@ -24,7 +24,7 @@ class StockPicking(models.Model):
         ) % (request.name, picking.name)
         message += "<ul>"
         for line in request_dict.values():
-            message += _("<li><b>%s</b>: Received quantity %s %s</li>") % (
+            message += _("<li><b>%s</b>: Received quantity %s - %s</li>") % (
                 line["name"],
                 line["product_qty"],
                 line["product_uom"],

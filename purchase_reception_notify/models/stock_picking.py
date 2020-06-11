@@ -18,7 +18,7 @@ class StockPicking(models.Model):
         ) % (picking.name)
         message += "<ul>"
         for purchase_line_id in purchase_dict.values():
-            message += _("<li><b>%s</b>: Received quantity %s %s</li>") % (
+            message += _("<li><b>%s</b>: Received quantity %s - %s</li>") % (
                 purchase_line_id["purchase_line"].product_id.display_name,
                 purchase_line_id["stock_move"].product_qty,
                 purchase_line_id["stock_move"].product_uom.name,

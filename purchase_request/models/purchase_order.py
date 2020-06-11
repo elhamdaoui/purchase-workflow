@@ -2,6 +2,8 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 from odoo import _, api, exceptions, fields, models
+from odoo.tools.misc import format_date
+from datetime import datetime
 
 
 class PurchaseOrder(models.Model):
@@ -21,9 +23,11 @@ class PurchaseOrder(models.Model):
             "have now been confirmed in Purchase Order %s:"
         ) % (request.name, self.name)
 
+        print("request_dict : ",request_dict)
         for line in request_dict.values():
+            print("line : ",line)
             message += _(
-                "<li><b>%s</b>: Ordered quantity %s %s, Planned date %s</li>"
+                "<li><b>%s</b>: Ordered quantity %s - %s, Planned date %s</li>"
             ) % (
                 line["name"],
                 line["product_qty"],
@@ -191,7 +195,7 @@ class PurchaseOrderLine(models.Model):
             "have now been received:"
         ) % (message_data["request_name"], message_data["requestor"])
         message += "<ul>"
-        message += _("<li><b>%s</b>: Received quantity %s %s</li>") % (
+        message += _("<li><b>%s</b>: Received quantity %s - %s</li>") % (
             message_data["product_name"],
             message_data["product_qty"],
             message_data["product_uom"],
