@@ -32,34 +32,34 @@ class StockPicking(models.Model):
         message += "</ul>"
         return message
 
-    def action_done(self):
-        super(StockPicking, self).action_done()
-        request_obj = self.env["purchase.request"]
-        for picking in self:
-            requests_dict = {}
-            if picking.picking_type_id.code != "incoming":
-                continue
-            for move in picking.move_lines:
-                if move.purchase_line_id:
-                    for (
-                        request_line
-                    ) in move.purchase_line_id.sudo().purchase_request_lines:
-                        request_id = request_line.request_id.id
-                        if request_id not in requests_dict:
-                            requests_dict[request_id] = {}
-                        data = {
-                            "name": request_line.name,
-                            "product_qty": move.product_qty,
-                            "product_uom": move.product_uom.name,
-                        }
-                        requests_dict[request_id][request_line.id] = data
-            for request_id in requests_dict:
-                request = request_obj.sudo().browse(request_id)
-                message = self._purchase_request_picking_confirm_message_content(
-                    picking, request, requests_dict[request_id]
-                )
-                request.sudo().message_post(
-                    body=message,
-                    subtype="mail.mt_comment",
-                    author_id=self.env.user.partner_id.id,
-                )
+#    def action_done(self):
+#        super(StockPicking, self).action_done()
+#        request_obj = self.env["purchase.request"]
+#        for picking in self:
+#            requests_dict = {}
+#            if picking.picking_type_id.code != "incoming":
+#                continue
+#            for move in picking.move_lines:
+#                if move.purchase_line_id:
+#                    for (
+#                        request_line
+#                    ) in move.purchase_line_id.sudo().purchase_request_lines:
+#                        request_id = request_line.request_id.id
+#                        if request_id not in requests_dict:
+#                            requests_dict[request_id] = {}
+#                        data = {
+#                            "name": request_line.name,
+#                            "product_qty": move.product_qty,
+#                            "product_uom": move.product_uom.name,
+#                        }
+#                        requests_dict[request_id][request_line.id] = data
+#            for request_id in requests_dict:
+#                request = request_obj.sudo().browse(request_id)
+#                message = self._purchase_request_picking_confirm_message_content(
+#                    picking, request, requests_dict[request_id]
+#                )
+#                request.sudo().message_post(
+#                    body=message,
+#                    subtype="mail.mt_comment",
+#                    author_id=self.env.user.partner_id.id,
+#                )
