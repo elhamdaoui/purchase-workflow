@@ -113,3 +113,5 @@ class StockMoveLine(models.Model):
         res = super(StockMoveLine, self)._action_done()
         self.allocate()
         return res
+
+    
